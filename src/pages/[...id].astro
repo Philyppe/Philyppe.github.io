@@ -1,31 +1,34 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import type { GetStaticPathsOptions, Page } from 'astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Pagination from '../../components/Pagination.astro';
+import PostPreview from '../../components/PostPreview.astro';
+import Subscribe from '../../components/Subscribe.astro';
+import siteConfig from '../../data/site-config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sortItemsByDateDesc } from '../../utils/data-utils';
 
-export async function getStaticPaths() {
-    const pages = await getCollection('pages');
-    return pages.map((page) => {
-        return {
-            params: { id: page.id },
-            props: { page }
-        };
-    });
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const allPosts = await getCollection('evidencias');
+
+  const categories = allPosts
+    .filter(post => post.data.isCategory === true)
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+  return paginate(categories, { pageSize: 10 });
 }
 
-type Props = { page: CollectionEntry<'pages'> };
+
+
+type Props = { page: Page<CollectionEntry<'evidencias'>> };
 
 const { page } = Astro.props;
-const { title, seo } = page.data;
-const { Content } = await render(page);
+const evidencias = page.data;
 ---
 
-<BaseLayout title={seo?.title ?? title} description={seo?.description} image={seo?.image} showHeader={false}>
-    <article class="mb-16 sm:mb-24">
-        <header class="mb-8">
-            <h1 class="font-serif text-3xl leading-tight font-medium sm:text-5xl sm:leading-tight">{title}</h1>
-        </header>
-        <div class="prose sm:prose-lg max-w-none">
-            <Content />
-        </div>
-    </article>
+<BaseLayout title="evidencias" description="Embark on a journey of personal insights and experiences through my evidence" showHeader={false}>
+    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">evidence Archive</h1>
+    {evidencias.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+    <Pagination page={page} class="my-16 sm:my-24" />
+    <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
