@@ -12,11 +12,8 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allPosts = await getCollection('evidencias');
 
   const posts = allPosts
+    // SOLO index.md de subcarpetas
     .filter(post => post.id.endsWith('/index'))
-    .map(post => ({
-      ...post,
-      id: post.id.replace('/index', '')
-    }))
     .sort(sortItemsByDateDesc);
 
   return paginate(posts, {
