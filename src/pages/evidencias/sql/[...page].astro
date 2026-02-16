@@ -8,21 +8,44 @@ import siteConfig from '../../../data/site-config';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../../utils/data-utils';
 
-
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const posts = (await getCollection('sql')).sort(sortItemsByDateDesc);
-    return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
+  const all = await getCollection('evidencias');
+
+  const posts = all
+    .filter(post =>
+      post.id.startsWith('sql/') &&
+      post.id !== 'sql/index'
+    )
+    .sort(sortItemsByDateDesc);
+
+  return paginate(posts, {
+    pageSize: siteConfig.postsPerPage || 4
+  });
 }
 
-type Props = { page: Page<CollectionEntry<'sql'>> };
+type Props = { page: Page<CollectionEntry<'evidencias'>> };
 
 const { page } = Astro.props;
 const sql = page.data;
 ---
 
-<BaseLayout title="sql" description="Embark on a journey of personal insights and experiences through my sql" showHeader={false}>
-    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">sql Archive</h1>
-    {sql.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
-    <Subscribe class="my-16 sm:my-24" />
+<BaseLayout
+  title="SQL"
+  description="Evidencias relacionadas con sql de datos"
+  showHeader={false}
+>
+  <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">
+    SQL
+  </h1>
+
+  {sql.length === 0 && (
+    <p class="italic opacity-70">No hay evidencias aún.</p>
+  )}
+
+  {sql.map(post => (
+    <PostPreview post={post} class="mb-10 sm:mb-12" />
+  ))}
+
+  <Pagination page={page} class="my-16 sm:my-24" />
+  <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
