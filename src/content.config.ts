@@ -16,17 +16,22 @@ const seoSchema = (image: ImageFunction) =>
     });
 
 const evidencias = defineCollection({
-    loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/evidencias' }),
-    schema: ({ image }) =>
-        z.object({
-            title: z.string(),
-            excerpt: z.string().optional(),
-            publishDate: z.coerce.date(),
-            updatedDate: z.coerce.date().optional(),
-            isFeatured: z.boolean().default(false),
-            tags: z.array(z.string()).default([]),
-            seo: seoSchema(image).optional()
-        })
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/evidencias' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      excerpt: z.string().optional(),
+      publishDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+
+      // 👇 NUEVO
+      isCategory: z.boolean().default(false),
+      order: z.number().optional(),
+
+      isFeatured: z.boolean().default(false),
+      tags: z.array(z.string()).default([]),
+      seo: seoSchema(image).optional()
+    })
 });
 
 const pages = defineCollection({
