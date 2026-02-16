@@ -10,7 +10,7 @@ import { slugify } from '../../../utils/common-utils';
 
 
 export async function getStaticPaths() {
-    const posts = (await getCollection('normalización')).sort(sortItemsByDateDesc);
+    const posts = (await getCollection('normalizacion')).sort(sortItemsByDateDesc);
     const postCount = posts.length;
     return posts.map((post, index) => ({
         params: { id: post.id },
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     }));
 }
 
-type Props = { post: CollectionEntry<'normalización'>; prevPost: CollectionEntry<'normalización'>; nextPost: CollectionEntry<'normalización'> };
+type Props = { post: CollectionEntry<'normalizacion'>; prevPost: CollectionEntry<'normalizacion'>; nextPost: CollectionEntry<'normalizacion'> };
 
 const { href } = Astro.url;
 const { post, prevPost, nextPost } = Astro.props;
