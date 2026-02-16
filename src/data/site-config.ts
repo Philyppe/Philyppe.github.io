@@ -74,7 +74,6 @@ Feel free to explore some of my coding projects on [GitHub](https://github.com/P
         }
     ]
 },
-,
     subscribe: {
         enabled: true,
         title: 'Subscribe to Dante Newsletter',
