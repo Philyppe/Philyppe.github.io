@@ -9,14 +9,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const allPosts = await getCollection('evidencias');
+  const allPosts = await getCollection('evidencias');
 
-    const posts = allPosts
-        .filter(post => post.id.endsWith('/index'))
-        .sort(sortItemsByDateDesc);
+  const posts = allPosts
+    .filter(post => post.id.endsWith('/index'))
+    .map(post => ({
+      ...post,
+      id: post.id.replace('/index', '')
+    }))
+    .sort(sortItemsByDateDesc);
 
-    return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
+  return paginate(posts, {
+    pageSize: siteConfig.postsPerPage || 4
+  });
 }
+
 
 type Props = { page: Page<CollectionEntry<'evidencias'>> };
 
