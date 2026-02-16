@@ -9,19 +9,43 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const posts = (await getCollection('modelado')).sort(sortItemsByDateDesc);
-    return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
+  const all = await getCollection('evidencias');
+
+  const posts = all
+    .filter(post =>
+      post.id.startsWith('modelado/') &&
+      post.id !== 'modelado/index'
+    )
+    .sort(sortItemsByDateDesc);
+
+  return paginate(posts, {
+    pageSize: siteConfig.postsPerPage || 4
+  });
 }
 
-type Props = { page: Page<CollectionEntry<'modelado'>> };
+type Props = { page: Page<CollectionEntry<'evidencias'>> };
 
 const { page } = Astro.props;
 const modelado = page.data;
 ---
 
-<BaseLayout title="modelado" description="Embark on a journey of personal insights and experiences through my modelado" showHeader={false}>
-    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">modelado Archive</h1>
-    {modelado.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
-    <Subscribe class="my-16 sm:my-24" />
+<BaseLayout
+  title="Modelado"
+  description="Evidencias relacionadas con modelado de datos"
+  showHeader={false}
+>
+  <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">
+    Modelado
+  </h1>
+
+  {modelado.length === 0 && (
+    <p class="italic opacity-70">No hay evidencias aún.</p>
+  )}
+
+  {modelado.map(post => (
+    <PostPreview post={post} class="mb-10 sm:mb-12" />
+  ))}
+
+  <Pagination page={page} class="my-16 sm:my-24" />
+  <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
