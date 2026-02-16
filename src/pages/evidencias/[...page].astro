@@ -1,34 +1,51 @@
 ---
 import type { GetStaticPathsOptions, Page } from 'astro';
 import { type CollectionEntry, getCollection } from 'astro:content';
-import Pagination from '../../components/Pagination.astro';
-import PostPreview from '../../components/PostPreview.astro';
-import Subscribe from '../../components/Subscribe.astro';
-import siteConfig from '../../data/site-config';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { sortItemsByDateDesc } from '../../utils/data-utils';
+import Pagination from '../../../components/Pagination.astro';
+import PostPreview from '../../../components/PostPreview.astro';
+import Subscribe from '../../../components/Subscribe.astro';
+import siteConfig from '../../../data/site-config';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { sortItemsByDateDesc } from '../../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const allPosts = await getCollection('evidencias');
+  const all = await getCollection('evidencias');
 
-  const categories = allPosts
-    .filter(post => post.data.isCategory === true)
-    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+  const posts = all
+    .filter(post =>
+      post.id.startsWith('sql/') &&
+      post.id !== 'sql/index'
+    )
+    .sort(sortItemsByDateDesc);
 
-  return paginate(categories, { pageSize: 10 });
+  return paginate(posts, {
+    pageSize: siteConfig.postsPerPage || 4
+  });
 }
-
-
 
 type Props = { page: Page<CollectionEntry<'evidencias'>> };
 
 const { page } = Astro.props;
-const evidencias = page.data;
+const sql = page.data;
 ---
 
-<BaseLayout title="evidencias" description="Embark on a journey of personal insights and experiences through my evidence" showHeader={false}>
-    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">evidence Archive</h1>
-    {evidencias.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
-    <Pagination page={page} class="my-16 sm:my-24" />
-    <Subscribe class="my-16 sm:my-24" />
+<BaseLayout
+  title="SQL"
+  description="Evidencias relacionadas con sql de datos"
+  showHeader={false}
+>
+  <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">
+    SQL
+  </h1>
+
+  {sql.length === 0 && (
+    <p class="italic opacity-70">No hay evidencias aún.</p>
+  )}
+
+  {sql.map(post => (
+    <PostPreview post={post} class="mb-10 sm:mb-12" />
+  ))}
+
+  <Pagination page={page} class="my-16 sm:my-24" />
+  <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
