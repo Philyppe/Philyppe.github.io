@@ -75,7 +75,7 @@ Feel free to explore some of my coding projects on [GitHub](https://github.com/P
     ]
 },
     subscribe: {
-        enabled: true,
+        enabled: false,
         title: 'Subscribe to Dante Newsletter',
         text: 'One update per week. All the latest posts directly in your inbox.',
         form: {
