@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const categories = (await getCollection('evidencias'))
+  .filter(({ data }) => data.isCategory)
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+---
+
+<BaseLayout title="Evidencias">
+  <section class="prose sm:prose-lg max-w-none">
+    <h1>Evidencias</h1>
+
+    {categories.length === 0 && (
+      <p>No hay categorías registradas.</p>
+    )}
+
+    <ul>
+      {categories.map((cat) => (
+        <li>
+          <h2>{cat.data.title}</h2>
+          {cat.data.excerpt && <p>{cat.data.excerpt}</p>}
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
