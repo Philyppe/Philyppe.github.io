@@ -60,7 +60,7 @@ My approach focuses on applying good practices and structured methodologies to b
 
 I have experience with Spring Boot, frontend development using PrimeFaces, and working under the MVC architecture.
 
-Currently, I am strengthening my knowledge in databases, data modeling, normalization, and SQL to build well-structured and optimized systems.
+Currently, I am strengthening my knowledge in databases and data modeling.
 
 Feel free to explore some of my coding projects on [GitHub](https://github.com/Philyppe).`,
     image: {
