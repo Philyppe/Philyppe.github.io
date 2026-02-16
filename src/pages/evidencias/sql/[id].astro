@@ -10,7 +10,7 @@ import { slugify } from '../../../utils/common-utils';
 
 
 export async function getStaticPaths() {
-    const posts = (await getCollection('SQL')).sort(sortItemsByDateDesc);
+    const posts = (await getCollection('sql')).sort(sortItemsByDateDesc);
     const postCount = posts.length;
     return posts.map((post, index) => ({
         params: { id: post.id },
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
     }));
 }
 
-type Props = { post: CollectionEntry<'SQL'>; prevPost: CollectionEntry<'SQL'>; nextPost: CollectionEntry<'SQL'> };
+type Props = { post: CollectionEntry<'sql'>; prevPost: CollectionEntry<'sql'>; nextPost: CollectionEntry<'sql'> };
 
 const { href } = Astro.url;
 const { post, prevPost, nextPost } = Astro.props;
