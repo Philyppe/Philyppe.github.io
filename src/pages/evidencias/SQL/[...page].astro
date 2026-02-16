@@ -9,19 +9,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-    const posts = (await getCollection('evidencias/SQL')).sort(sortItemsByDateDesc);
+    const posts = (await getCollection('SQL')).sort(sortItemsByDateDesc);
     return paginate(posts, { pageSize: siteConfig.postsPerPage || 4 });
 }
 
-type Props = { page: Page<CollectionEntry<'evidencias/SQL'>> };
+type Props = { page: Page<CollectionEntry<'SQL'>> };
 
 const { page } = Astro.props;
-const evidencias/SQL = page.data;
+const SQL = page.data;
 ---
 
-<BaseLayout title="evidencias/SQL" description="Embark on a journey of personal insights and experiences through my evidencias/SQL" showHeader={false}>
-    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">evidencias/SQL Archive</h1>
-    {evidencias/SQL.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+<BaseLayout title="SQL" description="Embark on a journey of personal insights and experiences through my SQL" showHeader={false}>
+    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">SQL Archive</h1>
+    {SQL.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
     <Pagination page={page} class="my-16 sm:my-24" />
     <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
