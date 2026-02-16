@@ -13,21 +13,16 @@ export async function getStaticPaths() {
 
   const posts = allPosts
     .filter(post => post.id.endsWith('/index'))
-    .map(post => ({
-      ...post,
-      id: post.id.replace('/index', '')
-    }));
+    .sort(sortItemsByDateDesc);
 
   return posts.map((post) => ({
-    params: { id: post.id },
-    props: {
-      post
-    }
+    params: {
+      // normalizacion/index → normalizacion
+      id: post.id.replace('/index', '')
+    },
+    props: { post }
   }));
 }
-
-
-
 
 
 type Props = { post: CollectionEntry<'evidencias'>; prevPost: CollectionEntry<'evidencias'>; nextPost: CollectionEntry<'evidencias'> };
