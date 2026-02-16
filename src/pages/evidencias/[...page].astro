@@ -11,15 +11,13 @@ import { sortItemsByDateDesc } from '../../utils/data-utils';
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const allPosts = await getCollection('evidencias');
 
-  const posts = allPosts
-    // SOLO index.md de subcarpetas
-    .filter(post => post.id.endsWith('/index'))
-    .sort(sortItemsByDateDesc);
+  const categories = allPosts
+    .filter(post => post.data.isCategory === true)
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
-  return paginate(posts, {
-    pageSize: siteConfig.postsPerPage || 4
-  });
+  return paginate(categories, { pageSize: 10 });
 }
+
 
 
 type Props = { page: Page<CollectionEntry<'evidencias'>> };
