@@ -11,22 +11,24 @@ import { slugify } from '../../utils/common-utils';
 export async function getStaticPaths() {
     const allPosts = await getCollection('evidencias');
 
-const posts = allPosts
-  .filter(post => !post.id.includes('/'))
-  .sort(sortItemsByDateDesc);
-
+    const posts = allPosts
+        .filter(post => post.id.endsWith('/index'))
+        .sort(sortItemsByDateDesc);
 
     const postCount = posts.length;
 
     return posts.map((post, index) => ({
-        params: { id: post.id },
+        params: {
+            id: post.id
+        },
         props: {
             post,
-            prevPost: index + 1 !== postCount ? posts[index + 1] : null,
-            nextPost: index !== 0 ? posts[index - 1] : null
+            prevPost: index + 1 < postCount ? posts[index + 1] : null,
+            nextPost: index > 0 ? posts[index - 1] : null
         }
     }));
 }
+
 
 
 type Props = { post: CollectionEntry<'evidencias'>; prevPost: CollectionEntry<'evidencias'>; nextPost: CollectionEntry<'evidencias'> };
