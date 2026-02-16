@@ -11,9 +11,10 @@ import { slugify } from '../../utils/common-utils';
 export async function getStaticPaths() {
     const allPosts = await getCollection('evidencias');
 
-    const posts = allPosts
-        .filter(post => post.id.split('/').length === 1)
-        .sort(sortItemsByDateDesc);
+const posts = allPosts
+  .filter(post => !post.id.includes('/'))
+  .sort(sortItemsByDateDesc);
+
 
     const postCount = posts.length;
 
