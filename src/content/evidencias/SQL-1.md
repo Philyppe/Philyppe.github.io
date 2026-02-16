@@ -6,10 +6,9 @@ tags:
   - Guide
 seo:
   image:
-    src: '../../../assets/images/post-1.jpg'
+    src: '@/assets/images/post-1.jpg'
     alt: A person standing at the window
 ---
-
 
 
 ![A person standing at the window](../../assets/images/post-1.jpg)
