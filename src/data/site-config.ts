@@ -62,7 +62,9 @@ I have experience with Spring Boot, frontend development using PrimeFaces, and w
 
 Currently, I am strengthening my knowledge in databases and data modeling.
 
-Feel free to explore some of my coding projects on [GitHub](https://github.com/Philyppe).`,
+Feel free to explore some of my coding projects on [GitHub](https://github.com/Philyppe).
+[Self introduction](https://drive.google.com/file/d/1Kx6QXfA9Ne8fwohHOVL2BIYVHZYTv3vE/view?usp=drive_link)
+`,
     image: {
         src: hero,
         alt: 'A person sitting at a desk in front of a computer'
