@@ -9,12 +9,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = (await getCollection('evidencias')).sort(sortItemsByDateDesc);
+  const allPosts = await getCollection('evidencias');
 
-  return paginate(posts, {
-    pageSize: siteConfig.postsPerPage || 4
-  });
+  const categories = allPosts
+    .filter(post => post.data.isCategory === true)
+    .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+  return paginate(categories, { pageSize: 10 });
 }
+
+
 
 type Props = { page: Page<CollectionEntry<'evidencias'>> };
 
@@ -22,19 +26,9 @@ const { page } = Astro.props;
 const evidencias = page.data;
 ---
 
-<BaseLayout
-  title="Evidencias"
-  description="Listado de evidencias"
-  showHeader={false}
->
-  <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">
-    Evidencias
-  </h1>
-
-  {evidencias.map(post => (
-    <PostPreview post={post} class="mb-10 sm:mb-12" />
-  ))}
-
-  <Pagination page={page} class="my-16 sm:my-24" />
-  <Subscribe class="my-16 sm:my-24" />
+<BaseLayout title="evidencias" description="Embark on a journey of personal insights and experiences through my evidence" showHeader={false}>
+    <h1 class="mb-12 font-serif text-2xl leading-tight italic sm:mb-16 sm:text-4xl">evidence Archive</h1>
+    {evidencias.map((post) => <PostPreview post={post} class="mb-10 sm:mb-12" />)}
+    <Pagination page={page} class="my-16 sm:my-24" />
+    <Subscribe class="my-16 sm:my-24" />
 </BaseLayout>
