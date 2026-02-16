@@ -53,20 +53,28 @@ const siteConfig: SiteConfig = {
             href: 'https://www.instagram.com/pipe__.__/'
         }
     ],
-    hero: {
-        title: 'Hi There & Welcome to My Corner of the Web!',
-        text: "I'm **Felipe López **, a System engeneer student, dedicated to developing in java.\nMy approach involves embracing the MBPSC to make any System or implementsation of them.\nI have Expereince with spring boot framework, developing of front end with primefaces, and following the structure of MVC.\n\nFeel free to explore some of my coding endeavors on [GitHub](https://github.com/Philyppe),
-        image: {
-            src: hero,
-            alt: 'A person sitting at a desk in front of a computer'
-        },
-        actions: [
-            {
-                text: 'Get in Touch',
-                href: '/contact'
-            }
-        ]
+   hero: {
+    title: 'Hi There & Welcome to My Corner of the Web!',
+    text: `I'm **Felipe López**, a Systems Engineering student passionate about software development in Java.
+My approach focuses on applying good practices and structured methodologies to build efficient and scalable systems.
+
+I have experience with Spring Boot, frontend development using PrimeFaces, and working under the MVC architecture.
+
+Currently, I am strengthening my knowledge in databases, data modeling, normalization, and SQL to build well-structured and optimized systems.
+
+Feel free to explore some of my coding projects on [GitHub](https://github.com/Philyppe).`,
+    image: {
+        src: hero,
+        alt: 'A person sitting at a desk in front of a computer'
     },
+    actions: [
+        {
+            text: 'Get in Touch',
+            href: '/contact'
+        }
+    ]
+},
+,
     subscribe: {
         enabled: true,
         title: 'Subscribe to Dante Newsletter',
