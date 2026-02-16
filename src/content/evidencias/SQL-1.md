@@ -5,7 +5,9 @@ publishDate: '2023-08-05'
 tags:
   - Guide
 seo:
-  image: ../../assets/images/post-1.jpg
+  image:
+    src: ../../assets/images/post-1.jpg
+    alt: A person standing at the window
 ---
 
 
