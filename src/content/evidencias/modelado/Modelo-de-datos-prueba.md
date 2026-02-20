@@ -5,7 +5,7 @@ excerpt: Evidencia práctica sobre la identificación de entidades y atributos a
 publishDate: '2026-02-20'
 ---
 
-![Alt text for image](../../assets/images/modelo-datos-biblioteca.png)
+![Alt text for image](../../assets/images/modelo-datos-biblioteca.drawio.png)
 
 El objetivo es demostrar la correcta abstracción del dominio antes de pasar al diseño lógico.
 
