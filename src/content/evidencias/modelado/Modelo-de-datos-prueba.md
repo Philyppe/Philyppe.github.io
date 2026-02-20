@@ -5,12 +5,7 @@ excerpt: Evidencia práctica sobre la identificación de entidades y atributos a
 publishDate: '2026-02-20'
 ---
 
-En esta evidencia se analiza un caso de negocio simple para identificar:
-
-- Entidades principales
-- Atributos relevantes
-- Claves primarias
-- Relaciones iniciales
+![Alt text for image](../../assets/images/modelo-datos-biblioteca.png)
 
 El objetivo es demostrar la correcta abstracción del dominio antes de pasar al diseño lógico.
 
