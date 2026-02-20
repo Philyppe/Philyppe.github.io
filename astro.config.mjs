@@ -6,9 +6,10 @@ import siteConfig from './src/data/site-config';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'http://philyppe.github.io',
-    vite: {
-        plugins: [tailwindcss()]
-    },
-    integrations: [mdx(), sitemap()]
+  site: 'https://philyppe.github.io',
+  output: 'static',
+  integrations: [mdx(), sitemap()],
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
