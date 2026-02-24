@@ -9,19 +9,27 @@ import { sortItemsByDateDesc } from '../../utils/data-utils';
 import { slugify } from '../../utils/common-utils';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('evidencias');
+    const posts = (await getCollection('evidencias'))
+        .filter(post => post.id.startsWith('sql/'))
+        .sort(sortItemsByDateDesc);
 
-  const posts = allPosts
-    .filter(post => post.id.endsWith('/index'))
-    .sort(sortItemsByDateDesc);
+    const postCount = posts.length;
 
-  return posts.map((post) => ({
-    params: {
-      // normalizacion/index → normalizacion
-      id: post.id.replace('/index', '')
-    },
-    props: { post }
-  }));
+    return posts.map((post, index) => {
+        const cleanId = post.id
+            .split('/')
+            .pop()
+            ?.replace(/\.(md|mdx)$/, '');
+
+        return {
+            params: { id: cleanId },
+            props: {
+                post,
+                prevPost: index + 1 !== postCount ? posts[index + 1] : null,
+                nextPost: index !== 0 ? posts[index - 1] : null
+            }
+        };
+    });
 }
 
 
