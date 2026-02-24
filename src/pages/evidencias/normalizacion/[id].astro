@@ -10,18 +10,28 @@ import { slugify } from '../../../utils/common-utils';
 
 
 export async function getStaticPaths() {
-    const posts = (await getCollection('normalizacion')).sort(sortItemsByDateDesc);
-    const postCount = posts.length;
-    return posts.map((post, index) => ({
-        params: { id: post.id },
-        props: {
-            post,
-            prevPost: index + 1 !== postCount ? posts[index + 1] : null,
-            nextPost: index !== 0 ? posts[index - 1] : null
-        }
-    }));
-}
+    const posts = (await getCollection('evidencias'))
+        .filter(post => post.id.startsWith('normalizacion/'))
+        .sort(sortItemsByDateDesc);
 
+    const postCount = posts.length;
+
+    return posts.map((post, index) => {
+        const cleanId = post.id
+            .split('/')
+            .pop()
+            ?.replace(/\.(md|mdx)$/, '');
+
+        return {
+            params: { id: cleanId },
+            props: {
+                post,
+                prevPost: index + 1 !== postCount ? posts[index + 1] : null,
+                nextPost: index !== 0 ? posts[index - 1] : null
+            }
+        };
+    });
+}
 type Props = { post: CollectionEntry<'normalizacion'>; prevPost: CollectionEntry<'normalizacion'>; nextPost: CollectionEntry<'normalizacion'> };
 
 const { href } = Astro.url;
