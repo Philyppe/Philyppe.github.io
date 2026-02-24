@@ -10,10 +10,16 @@ import { slugify } from '../../../utils/common-utils';
 
 
 export async function getStaticPaths() {
-    const posts = (await getCollection('modelado')).sort(sortItemsByDateDesc);
+    const posts = (await getCollection('evidencias'))
+        .filter(post => post.slug.startsWith('modelado/'))
+        .sort(sortItemsByDateDesc);
+
     const postCount = posts.length;
+
     return posts.map((post, index) => ({
-        params: { id: post.id },
+        params: { 
+            id: post.slug.replace('modelado/', '') 
+        },
         props: {
             post,
             prevPost: index + 1 !== postCount ? posts[index + 1] : null,
