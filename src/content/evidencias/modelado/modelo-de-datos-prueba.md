@@ -7,6 +7,11 @@ publishDate: '2026-02-20'
 
 ![Modelo de datos](../../../assets/images/modelo-datos-biblioteca.drawio.png)
 ![Modelo de datos](../../../assets/images/modelo-datos-paquetes.drawio.png)
+![Modelo de datos](../../../assets/images/modelo-datos-paquetes.drawio.png)
+![Modelo de datos](../../../assets/images/modelodatos-ejercicio1-ER.drawio.png)
+![Modelo de datos](../../../assets/images/modelodatos-ejercicio1-v4.drawio.png)
+![Modelo de datos](../../../assets/images/modelodatos-ejercicio2-v4.drawio.png)
+![Modelo de datos](../../../assets/images/modelodatos-ejercicio3-v4.drawio.png)
 
 El objetivo es demostrar la correcta abstracción del dominio antes de pasar al diseño lógico.
 
