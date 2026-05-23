@@ -14,3 +14,7 @@ La empresa de servicios tecnológicos **"Soluciones Innova"** ha decidido modern
 - **Contratos**: registran las fechas de inicio y finalización planificadas, y el precio pactado para ese contrato específico.
 - **Gerentes de proyecto**: identificados por un código de empleado. Tienen un salario fijo (que puede diferir del sueldo recomendado para su rango profesional) y un nombre. Cada gerente puede tener un superior directo de rango inmediatamente más alto.
 - **Equipos de proyecto**: formados por varios gerentes que mantienen su independencia y pueden participar en varios equipos en paralelo. Si un servicio se cancela, el equipo deja de existir, pero los gerentes continúan en la base de datos.
+
+## Diagrama
+
+![Diagrama](../../../assets/images/modelodatos-ejercicio2-v4.drawio.png)

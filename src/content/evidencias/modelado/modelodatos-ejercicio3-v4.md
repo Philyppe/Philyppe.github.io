@@ -15,3 +15,7 @@ Se requiere diseñar la base de datos para la **gestión operativa del Sistema d
 - **Flota de Trenes**: cada línea tiene asignada su propia flota. Un tren puede estar asignado a una sola línea a la vez, o en mantenimiento sin pertenecer a ninguna. La cantidad de trenes por línea debe ser mínimo igual al número de estaciones de esa línea y máximo el doble de dicho número.
 - **Patio de Mantenimiento**: cada tren debe tener un patio asignado en todo momento (obligatorio). Un tren puede ser reasignado a un patio diferente.
 - **Necesidades de Información**: el sistema debe permitir consultar todos los accesos disponibles para los pasajeros en cada línea del metro.
+
+## Diagrama
+
+![Diagrama](../../../assets/images/modelodatos-ejercicio3-v4.drawio.png)

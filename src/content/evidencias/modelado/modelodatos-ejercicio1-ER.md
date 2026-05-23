@@ -25,3 +25,7 @@ En el sistema de información se desea considerar la información de los **produ
 - **Supuesto 8**: El residuo se traslada en un tipo de envase determinado por la empresa productora que no varía a lo largo del traslado.
 - **Supuesto 9**: Es interesante conocer la fecha de llegada a destino y el tratamiento al que se someten los residuos.
 - **Supuesto 10**: En un traslado sólo puede trasladarse un residuo de una empresa productora.
+
+## Diagrama
+
+![Diagrama](../../../assets/images/modelodatos-ejercicio1-ER.drawio.png)

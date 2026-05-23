@@ -21,3 +21,7 @@ En el estacionamiento de la Universidad El Bosque se piensa implementar un espac
    - **Filtros**: tipo (aire, aceite, combustible).
    - **Baterías**: amperaje y voltaje.
    - **Neumáticos**: ancho, perfil y diámetro.
+
+## Diagrama
+
+![Diagrama](../../../assets/images/modelodatos-ejercicio1-v4.drawio.png)
