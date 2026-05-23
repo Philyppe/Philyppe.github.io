@@ -1,5 +1,5 @@
 ---
-title: 'Modelo ER – Comidas a Domicilio (Eat\'n Go)'
+title: "Modelo ER – Comidas a Domicilio (Eat'n Go)"
 excerpt: Modelo Entidad-Relación para la gestión de una franquicia de comidas rápidas que vende pizzas, bocadillos y productos complementarios, con pedidos en local, para recoger y a domicilio.
 publishDate: '2026-05-22'
 tags: ['ER', 'modelado', 'taller-mer']
