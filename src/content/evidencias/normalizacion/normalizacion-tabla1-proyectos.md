@@ -36,7 +36,9 @@ La tabla se encuentra en **Primera Forma Normal (1FN)** porque todos sus atribut
 
 | Atributo | Depende de |
 |---|---|
+| cod_proyecto | X+, PK |
 | nom_proyecto | cod_proyecto |
+| cod_empleado | X+, PK |
 | nom_empleado | cod_empleado |
 | profesion | cod_empleado |
 | vlr_hora | cod_empleado |
