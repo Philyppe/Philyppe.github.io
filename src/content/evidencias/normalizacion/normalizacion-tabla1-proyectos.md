@@ -22,50 +22,150 @@ Se tiene la siguiente tabla sin normalizar que almacena la relación entre proye
 | 1030 | BI | 2030 | Llamile | Programador | 20000 | 10 |
 | 1010 | ERP | 2040 | Andrea | Ingeniero | 100000 | 40 |
 
-La clave primaria compuesta es **(cod_proyecto, cod_empleado)**. Se pide indicar en qué forma normal se encuentra y convertirla a 3FN paso a paso.
+La clave primaria compuesta es **(cod_proyecto, cod_empleado)**.
+
+---
+
+## Forma normal actual
+
+La tabla se encuentra en **Primera Forma Normal (1FN)** porque todos sus atributos son atómicos y no existen grupos repetitivos ni atributos multivaluados. Sin embargo, **no cumple la 2FN** porque existen dependencias parciales: varios atributos dependen únicamente de una parte de la clave compuesta y no de ella en su totalidad.
 
 ---
 
 ## 1. Dependencias directas — Cierre X⁺
 
-*(Escribe aquí la tabla de dependencias funcionales identificadas y calcula el cierre de cada atributo o conjunto de atributos.)*
-
-| Dependencia | Tipo |
+| Atributo | Depende de |
 |---|---|
-| cod_proyecto → nom_proyecto | Parcial |
-| cod_empleado → nom_empleado, profesion, vlr_hora | Parcial |
-| cod_proyecto, cod_empleado → hrs_asignadas | Completa |
+| nom_proyecto | cod_proyecto |
+| nom_empleado | cod_empleado |
+| profesion | cod_empleado |
+| vlr_hora | cod_empleado |
+| hrs_asignadas | (cod_proyecto, cod_empleado) |
+
+`nom_proyecto`, `nom_empleado`, `profesion` y `vlr_hora` son dependencias **parciales** porque dependen de un solo atributo de la clave. Solo `hrs_asignadas` depende completamente de la clave compuesta.
 
 ---
 
 ## 2. Redefinición de la llave con X⁺
 
-*(Describe aquí cómo queda definida la superllave y la clave candidata tras calcular los cierres.)*
+Calculando el cierre de la clave compuesta:
+
+**{cod_proyecto, cod_empleado}⁺** = { cod_proyecto, nom_proyecto, cod_empleado, nom_empleado, profesion, vlr_hora, hrs_asignadas }
+
+El cierre abarca todos los atributos, por lo que **(cod_proyecto, cod_empleado)** es efectivamente la superllave y clave candidata de la tabla original. Las dependencias parciales confirman que se debe descomponer para alcanzar la 2FN.
 
 ---
 
 ## 3. Separación a 2FN — Eliminación de dependencias parciales
 
-*(Muestra aquí las tablas resultantes al eliminar las dependencias parciales de la clave compuesta.)*
+Se separan los atributos que dependen parcialmente de la clave en tablas independientes:
+
+**PROYECTO**
+
+| **cod_proyecto** | nom_proyecto |
+|---|---|
+| 1010 | ERP |
+| 1020 | CRM |
+| 1030 | BI |
+
+**EMPLEADO**
+
+| **cod_empleado** | nom_empleado | profesion | vlr_hora |
+|---|---|---|---|
+| 2010 | Sandra | Ingeniero | 100000 |
+| 2020 | Claudia | Analista | 50000 |
+| 2030 | Yamyle | Programador | 20000 |
+| 2040 | Andrea | Ingeniero | 100000 |
+
+**ASIGNACION**
+
+| **cod_proyecto** | **cod_empleado** | hrs_asignadas |
+|---|---|---|
+| 1010 | 2010 | 20 |
+| 1010 | 2020 | 10 |
+| 1010 | 2030 | 10 |
+| 1020 | 2010 | 10 |
+| 1020 | 2020 | 15 |
+| 1020 | 2030 | 20 |
+| 1030 | 2010 | 10 |
+| 1030 | 2020 | 15 |
+| 1030 | 2030 | 10 |
+| 1010 | 2040 | 40 |
+
+Las tres tablas están ahora en **2FN**: ningún atributo no-clave depende parcialmente de la clave primaria.
 
 ---
 
 ## 4. Dependencias transitivas
 
-*(Identifica aquí las dependencias transitivas que permanecen tras la 2FN.)*
+Revisando las tablas en 2FN se detecta que en **EMPLEADO** existe una dependencia transitiva:
 
-| Dependencia | Tabla afectada |
+`cod_empleado → profesion → vlr_hora`
+
+Es decir, `vlr_hora` no depende directamente de la clave sino de `profesion`, que a su vez depende de `cod_empleado`.
+
+| Atributo | Depende de |
 |---|---|
-| profesion → vlr_hora | EMPLEADO |
+| vlr_hora | profesion |
+
+Las tablas **PROYECTO** y **ASIGNACION** no presentan dependencias transitivas.
 
 ---
 
 ## 5. Separación a 3FN — Eliminación de dependencias transitivas
 
-*(Muestra aquí las tablas finales tras eliminar las dependencias transitivas.)*
+Se extrae `profesion → vlr_hora` a su propia tabla. La tabla EMPLEADO pierde `vlr_hora` y queda con `profesion` como FK hacia la nueva tabla.
+
+**PROYECTO** *(sin cambios)*
+
+| **cod_proyecto** | nom_proyecto |
+|---|---|
+| 1010 | ERP |
+| 1020 | CRM |
+| 1030 | BI |
+
+**PROFESION** *(nueva)*
+
+| **profesion** | vlr_hora |
+|---|---|
+| Ingeniero | 100000 |
+| Analista | 50000 |
+| Programador | 20000 |
+
+**EMPLEADO** *(actualizada)*
+
+| **cod_empleado** | nom_empleado | profesion |
+|---|---|---|
+| 2010 | Sandra | Ingeniero |
+| 2020 | Claudia | Analista |
+| 2030 | Yamyle | Programador |
+| 2040 | Andrea | Ingeniero |
+
+**ASIGNACION** *(sin cambios)*
+
+| **cod_proyecto** | **cod_empleado** | hrs_asignadas |
+|---|---|---|
+| 1010 | 2010 | 20 |
+| 1010 | 2020 | 10 |
+| 1010 | 2030 | 10 |
+| 1020 | 2010 | 10 |
+| 1020 | 2020 | 15 |
+| 1020 | 2030 | 20 |
+| 1030 | 2010 | 10 |
+| 1030 | 2020 | 15 |
+| 1030 | 2030 | 10 |
+| 1010 | 2040 | 40 |
 
 ---
 
 ## 6. Modelo final
 
-*(Escribe aquí el esquema relacional resultante con nombre de tabla, atributos, PK y FK.)*
+Las cuatro tablas resultantes en **3FN**:
+
+**PROYECTO** ( **cod_proyecto**, nom_proyecto )
+
+**PROFESION** ( **profesion**, vlr_hora )
+
+**EMPLEADO** ( **cod_empleado**, nom_empleado, profesion → *FK a PROFESION* )
+
+**ASIGNACION** ( **cod_proyecto** → *FK a PROYECTO*, **cod_empleado** → *FK a EMPLEADO*, hrs_asignadas )
