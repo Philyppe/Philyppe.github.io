@@ -11,20 +11,7 @@ La empresa **LOGISTIC SYSTEMS S.A.S.** presta servicios de envio puerta a puerta
 
 Toda la informacion se encuentra en una unica relacion sin normalizar:
 
-```
-ENVIO(num_guia, fecha_guia, hora_guia,
-      orgn_nit, orgn_nombre, orgn_actividad, orgn_ciudad, orgn_pais,
-      orgn_direccion, orgn_telefono, orgn_celular,
-      dest_id, dest_nombre, dest_cod_ciudad, dest_ciudad, dest_pais,
-      dest_direccion, dest_telefono, dest_km_desde_origen,
-      cod_zona, nombre_zona, tarifa_base_zona,
-      cod_empleado, nombre_empleado, licencia_empleado,
-      placa_vehiculo, tipo_vehiculo, capacidad_vehiculo,
-      cod_paquete, tipo_paquete, nombre_paquete, descripcion_paquete,
-      peso_paquete, valor_declarado, cant_unidades, valor_flete_paquete,
-      cod_evento, fecha_evento, estado_evento, descripcion_evento,
-      cod_pago, metodo_pago, valor_pagado)
-```
+ENVIO(num_guia, fecha_guia, hora_guia, orgn_nit, orgn_nombre, orgn_actividad, orgn_ciudad, orgn_pais, orgn_direccion, orgn_telefono, orgn_celular, dest_id, dest_nombre, dest_cod_ciudad, dest_ciudad, dest_pais, dest_direccion, dest_telefono, dest_km_desde_origen, cod_zona, nombre_zona, tarifa_base_zona, cod_empleado, nombre_empleado, licencia_empleado, placa_vehiculo, tipo_vehiculo, capacidad_vehiculo, cod_paquete, tipo_paquete, nombre_paquete, descripcion_paquete, peso_paquete, valor_declarado, cant_unidades, valor_flete_paquete, cod_evento, fecha_evento, estado_evento, descripcion_evento, cod_pago, metodo_pago, valor_pagado)
 
 **Muestra de datos:**
 

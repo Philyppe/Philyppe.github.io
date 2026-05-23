@@ -11,18 +11,7 @@ La cadena **STREAM&GO** administra varios locales fisicos que alquilan peliculas
 
 Toda la informacion esta contenida en una sola tabla sin normalizar:
 
-```
-ALQUILER(cod_alquiler, fecha_alquiler, num_membresia, cod_cliente,
-         nom_cliente, dir_cliente, tel_cliente, email_cliente,
-         cod_plan, nombre_plan, tarifa_dia_plan, dias_prestamo_max,
-         cod_sucursal, nombre_sucursal, direccion_sucursal, ciudad_sucursal,
-         cod_cassette, formato_cassette, estado_cassette,
-         cod_pelicula, titulo_pelicula, anio_pelicula,
-         cod_director, nombre_director, nacionalidad_director,
-         cod_categoria, nombre_categoria, recargo_categoria,
-         cod_actor, nombre_actor, fecha_nac_actor, rol_en_pelicula,
-         fecha_prog_dev, fecha_real_dev, dias_retraso, recargo_mora)
-```
+ALQUILER(cod_alquiler, fecha_alquiler, num_membresia, cod_cliente, nom_cliente, dir_cliente, tel_cliente, email_cliente, cod_plan, nombre_plan, tarifa_dia_plan, dias_prestamo_max, cod_sucursal, nombre_sucursal, direccion_sucursal, ciudad_sucursal, cod_cassette, formato_cassette, estado_cassette, cod_pelicula, titulo_pelicula, anio_pelicula, cod_director, nombre_director, nacionalidad_director, cod_categoria, nombre_categoria, recargo_categoria, cod_actor, nombre_actor, fecha_nac_actor, rol_en_pelicula, fecha_prog_dev, fecha_real_dev, dias_retraso, recargo_mora)
 
 **Muestra de datos:**
 
